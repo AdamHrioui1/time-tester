@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Desktop time <span id="pc_time"></span></h1>
+    <h1><span id="pc_time"></span></h1>
     <h1>Server time <span id="real_time"></span></h1>
 
     <script>
@@ -17,8 +17,29 @@
         var t = new Date()
         var t2 = new Date().toLocaleString('en-Us', { timeZone: 'Africa/Casablanca', timeStyle: 'medium', houeCycle: 'h24'})
 
-        pc_time.innerText = t;
         real_time.innerText = t2;
+
+        function getTime(){
+            var a;
+            fetch('http://worldtimeapi.org/api/timezone/Africa/Casablanca')
+            .then(res => res.json())
+            .then(data => {
+                pc_time.innerText = data.datetime.slice(11, 19)
+                a = data.datetime.slice(11, 19)
+
+                if(a === '16:32:40'){
+                    console.log('yeeeeeeeeeeeeeeeeeeeeeeeeeeh');
+                }
+
+                console.log(data);
+            })
+
+            return a
+        }
+
+        setInterval(() => {
+            getTime()
+        }, 1000)
 
     </script>
 </body>
