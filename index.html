@@ -19,24 +19,14 @@
 
         real_time.innerText = t2;
 
-        function getTime(){
-            fetch('https://api.ipgeolocation.io/timezone?apiKey=0fe0f35e8bf04bd882f9881fe082e426&tz=Africa/Casablanca')
+        async function getTime(){
+            await fetch('http://api.timezonedb.com/v2.1/list-time-zone?key=V5MMBAREHX8K&format=json&country=MA')
             .then(res => res.json())
             .then(data => {
-                pc_time.innerHTML = data.time_24
-                if(data.time_24 === '17:03:00'){
-                    pc_time.innerHTML = 'yeeeeeeeeeeeeeeeeeeeeey its wooooooooork';
-                }
-                if(data.time_24 === '17:03:30'){
-                    pc_time.innerHTML = 'wslat 15:00:30';
-                }
-                if(data.time_24 === '17:04:00'){
-                    pc_time.innerHTML = 'wslat 15:01:00';
-                }
-                if(data.time_24 === '17:04:30'){
-                    pc_time.innerHTML = 'wslat 15:01:30';
-                }
-                //console.log(data);
+                var timestamp = data.zones[0].timestamp * 1000
+                var date = new Date(timestamp)
+                var realTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+                console.log(realTime);
             })
         }
 
