@@ -14,19 +14,15 @@
         const pc_time = document.getElementById('pc_time')
         const real_time = document.getElementById('real_time')
 
-        var t = new Date()
-        var t2 = new Date().toLocaleString('en-Us', { timeZone: 'Africa/Casablanca', timeStyle: 'medium', houeCycle: 'h24'})
-
-        real_time.innerText = t2;
-
-        function getTime(){
-            fetch('https://api.timezonedb.com/v2.1/list-time-zone?key=V5MMBAREHX8K&format=json&country=MA')
+        async function getTime(){
+            await fetch('http://api.timezonedb.com/v2.1/list-time-zone?key=V5MMBAREHX8K&format=json&country=MA')
             .then(res => res.json())
             .then(data => {
                 var timestamp = data.zones[0].timestamp * 1000
                 var date = new Date(timestamp)
                 var realTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
                 console.log(realTime);
+                real_time.innerText = realTime;
             })
         }
 
