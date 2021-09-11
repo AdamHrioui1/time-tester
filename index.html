@@ -20,21 +20,15 @@
         real_time.innerText = t2;
 
         function getTime(){
-            var a;
-            fetch('http://worldtimeapi.org/api/timezone/Africa/Casablanca')
+            fetch('https://api.ipgeolocation.io/timezone?apiKey=0fe0f35e8bf04bd882f9881fe082e426&tz=Africa/Casablanca')
             .then(res => res.json())
             .then(data => {
-                pc_time.innerText = data.datetime.slice(11, 19)
-                a = data.datetime.slice(11, 19)
-
-                if(a === '16:32:40'){
-                    console.log('yeeeeeeeeeeeeeeeeeeeeeeeeeeh');
+                pc_time.innerHTML = data.time_24
+                if(data.time_24 === '15:00:00'){
+                    pc_time.innerHTML = 'yeeeeeeeeeeeeeeeeeeeeey its wooooooooork';
                 }
-
-                console.log(data);
+                //console.log(data);
             })
-
-            return a
         }
 
         setInterval(() => {
