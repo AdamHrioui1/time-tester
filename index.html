@@ -19,8 +19,8 @@
 
         real_time.innerText = t2;
 
-        async function getTime(){
-            await fetch('https://api.timezonedb.com/v2.1/list-time-zone?key=V5MMBAREHX8K&format=json&country=MA')
+        function getTime(){
+            fetch('https://api.timezonedb.com/v2.1/list-time-zone?key=V5MMBAREHX8K&format=json&country=MA')
             .then(res => res.json())
             .then(data => {
                 var timestamp = data.zones[0].timestamp * 1000
